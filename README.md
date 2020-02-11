@@ -1,1 +1,1 @@
-# OnlineStoreOnSpringFramework
+# Online Store on Spring Framework
