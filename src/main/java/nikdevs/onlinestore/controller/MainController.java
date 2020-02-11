@@ -32,8 +32,8 @@ public class MainController {
         return "product";
     }
 
-    @GetMapping("/store")
+    @GetMapping("/shop")
     public String storePage() {
-        return "store";
+        return "shop";
     }
 }

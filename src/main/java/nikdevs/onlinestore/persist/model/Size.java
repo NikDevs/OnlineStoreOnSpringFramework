@@ -4,22 +4,22 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name = "sizes")
+public class Size {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column
-    private String name;
-    @OneToMany(mappedBy = "category")
-    private List<Product> products;
+    private int value;
+    @ManyToMany(mappedBy = "sizes")
+    List<Product> products;
 
-    public Category() {
+    public Size() {
     }
 
-    public Category(String name) {
-        this.name = name;
+    public Size(int value) {
+        this.value = value;
     }
 
     public int getId() {
@@ -30,12 +30,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public List<Product> getProducts() {

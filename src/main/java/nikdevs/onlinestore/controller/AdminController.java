@@ -1,8 +1,8 @@
 package nikdevs.onlinestore.controller;
 
 import nikdevs.onlinestore.persist.model.User;
-import nikdevs.onlinestore.persist.repo.RoleRepository;
-import nikdevs.onlinestore.service.UserService;
+import nikdevs.onlinestore.service.interfaces.RoleService;
+import nikdevs.onlinestore.service.interfaces.UserService;
 import nikdevs.onlinestore.service.model.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -18,14 +18,12 @@ import javax.validation.Valid;
 @Controller
 public class AdminController {
 
-    private final RoleRepository roleRepository;
-
+    private final RoleService roleService;
     private final UserService userService;
 
     @Autowired
-    public AdminController(RoleRepository roleRepository,
-                           @Lazy UserService userService) {
-        this.roleRepository = roleRepository;
+    public AdminController(RoleService roleService, @Lazy UserService userService) {
+        this.roleService = roleService;
         this.userService = userService;
     }
 
@@ -47,7 +45,7 @@ public class AdminController {
         model.addAttribute("edit", true);
         model.addAttribute("activePage", "Users");
         model.addAttribute("user", userService.findById(id));
-        model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("roles", roleService.findAll());
         return "admin/user_form";
     }
 
@@ -56,7 +54,7 @@ public class AdminController {
         model.addAttribute("create", true);
         model.addAttribute("activePage", "Users");
         model.addAttribute("user", new User());
-        model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("roles", roleService.findAll());
         return "admin/user_form";
     }
 
@@ -75,18 +73,24 @@ public class AdminController {
     @GetMapping("/admin/roles")
     public String adminRolesPage(Model model) {
         model.addAttribute("activePage", "Roles");
-        return "admin/index";
+        return "admin/roles";
     }
 
     @GetMapping("/admin/categories")
     public String adminCategoriesPage(Model model) {
         model.addAttribute("activePage", "Categories");
-        return "admin/index";
+        return "admin/categories";
     }
 
     @GetMapping("/admin/products")
     public String adminProductsPage(Model model) {
         model.addAttribute("activePage", "Products");
-        return "admin/index";
+        return "admin/products";
+    }
+
+    @GetMapping("/admin/sizes")
+    public String adminSizesPage(Model model) {
+        model.addAttribute("activePage", "Sizes");
+        return "admin/sizes";
     }
 }

@@ -1,4 +1,4 @@
-package nikdevs.onlinestore.security;
+package nikdevs.onlinestore.config;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 import org.springframework.stereotype.Component;

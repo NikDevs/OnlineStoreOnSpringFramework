@@ -63,7 +63,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: int
                   autoIncrement: true
                   constraints:
                     primaryKey: true
@@ -93,7 +93,6 @@ databaseChangeLog:
                   name: name
                   value: "ROLE_CLIENT"
 
-
   - changeSet:
       id: 5
       author: NikDevs
@@ -110,7 +109,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: role_id
-                  type: BIGINT
+                  type: int
                   constraints:
                     foreignKeyName: fk_role_id
                     references: roles(id)
@@ -160,11 +159,12 @@ databaseChangeLog:
               - column:
                   name: description
                   type: varchar(512)
-                  constraints:
-                    nullable: true
               - column:
                   name: price
                   type: DOUBLE PRECISION
+              - column:
+                  name: img
+                  type: varchar(1024)
               - column:
                   name: category_id
                   type: BIGINT
@@ -174,11 +174,54 @@ databaseChangeLog:
       author: NikDevs
       changes:
         - createTable:
+            tableName: sizes
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: value
+                  type: int
+                  constraints:
+                    unique: true
+                    nullable: false
+
+  - changeSet:
+      id: 9
+      author: NikDevs
+      changes:
+        - createTable:
+            tableName: products_sizes
+            columns:
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_product_id
+                    references: products(id)
+                    nullable: false
+              - column:
+                  name: size_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_size_id
+                    references: sizes(id)
+                    nullable: false
+
+  - changeSet:
+      id: 10
+      author: NikDevs
+      changes:
+        - createTable:
             tableName: categories
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: int
                   autoIncrement: true
                   constraints:
                     primaryKey: true

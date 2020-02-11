@@ -4,6 +4,7 @@ import nikdevs.onlinestore.persist.model.Role;
 import nikdevs.onlinestore.persist.model.User;
 import nikdevs.onlinestore.persist.repo.RoleRepository;
 import nikdevs.onlinestore.persist.repo.UserRepository;
+import nikdevs.onlinestore.service.interfaces.UserService;
 import nikdevs.onlinestore.service.model.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -34,6 +35,13 @@ public class UserServiceJpaImpl implements UserService {
     }
 
     @Override
+    public List<SystemUser> findAll() {
+        return userRepository.findAll().stream()
+                .map(SystemUser::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public SystemUser findById(Long id) {
         return new SystemUser(userRepository.findById(id).get());
     }
@@ -59,16 +67,9 @@ public class UserServiceJpaImpl implements UserService {
         user.setFirstName(systemUser.getFirstName());
         user.setLastName(systemUser.getLastName());
         user.setEmail(systemUser.getEmail());
-        user.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findOneByName("ROLE_CLIENT"))));
+        user.setRoles(systemUser.getRoles());
         userRepository.save(user);
         return true;
-    }
-
-    @Override
-    public List<SystemUser> findAll() {
-        return userRepository.findAll().stream()
-                .map(SystemUser::new)
-                .collect(Collectors.toList());
     }
 
     @Override

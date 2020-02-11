@@ -1,8 +1,8 @@
-package nikdevs.onlinestore.security;
+package nikdevs.onlinestore.config;
 
 import nikdevs.onlinestore.persist.repo.RoleRepository;
 import nikdevs.onlinestore.persist.repo.UserRepository;
-import nikdevs.onlinestore.service.UserService;
+import nikdevs.onlinestore.service.interfaces.UserService;
 import nikdevs.onlinestore.service.UserServiceJpaImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

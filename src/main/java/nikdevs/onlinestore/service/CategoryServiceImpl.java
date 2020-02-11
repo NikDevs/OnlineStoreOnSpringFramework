@@ -2,6 +2,7 @@ package nikdevs.onlinestore.service;
 
 import nikdevs.onlinestore.persist.model.Category;
 import nikdevs.onlinestore.persist.repo.CategoryRepository;
+import nikdevs.onlinestore.service.interfaces.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,18 +20,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category findById(long id) {
+    public List<Category> findAll() {
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public Category findById(int id) {
         return categoryRepository.getOne(id);
     }
 
     @Override
     public Category findByName(String name) {
         return categoryRepository.findByName(name);
-    }
-
-    @Override
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
     }
 
     @Override
@@ -41,7 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public void remove(long id) {
+    public void remove(int id) {
         categoryRepository.delete(findById(id));
     }
 }
