@@ -9,7 +9,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column
     private String code;
     @Column
@@ -17,37 +17,42 @@ public class Product {
     @Column
     private String description;
     @Column
-    private double price;
-    @Column
-    private String img;
+    private Double price;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    @ManyToMany
+    @ManyToOne(optional = false)
+    private Brand brand;
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "products_sizes",
                 joinColumns = @JoinColumn(name = "product_id"),
                 inverseJoinColumns = @JoinColumn(name = "size_id"))
-    private List<Size> sizes;
+    private Set<Size> sizes;
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name = "products_pictures",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "picture_id"))
+    private List<Picture> pictures;
 
     public Product() {
-        this.sizes = new ArrayList<>();
     }
 
-    public Product(String code, String name, String description, double price, String img, Category category, ArrayList<Size> sizes) {
+    public Product(String code, String name, String description, double price, Category category, Brand brand, Set<Size> sizes, List<Picture> pictures) {
         this.code = code;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.img = img;
         this.category = category;
+        this.brand = brand;
         this.sizes = sizes;
+        this.pictures = pictures;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -75,20 +80,12 @@ public class Product {
         this.description = description;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 
     public Category getCategory() {
@@ -99,11 +96,27 @@ public class Product {
         this.category = category;
     }
 
-    public List<Size> getSizes() {
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    public Set<Size> getSizes() {
         return sizes;
     }
 
-    public void setSizes(List<Size> sizes) {
+    public void setSizes(Set<Size> sizes) {
         this.sizes = sizes;
+    }
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
     }
 }

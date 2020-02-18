@@ -1,12 +1,15 @@
-package nikdevs.onlinestore.service;
+package nikdevs.onlinestore.service.impl;
 
 import nikdevs.onlinestore.persist.model.Size;
 import nikdevs.onlinestore.persist.repo.SizeRepository;
 import nikdevs.onlinestore.service.interfaces.SizeService;
+import nikdevs.onlinestore.service.model.SizeRepr;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class SizeServiceImpl implements SizeService {
 
     private SizeRepository sizeRepository;
@@ -17,27 +20,24 @@ public class SizeServiceImpl implements SizeService {
     }
 
     @Override
-    public List<Size> findAll() {
-        return sizeRepository.findAll();
+    public List<SizeRepr> findAll() {
+        return sizeRepository.findAllSizeRepr();
     }
 
     @Override
-    public Size findById(int id) {
-        return sizeRepository.getOne(id);
+    public SizeRepr findById(int id) {
+        return new SizeRepr(sizeRepository.findById(id).get());
     }
 
     @Override
-    public Size findByValue(int value) {
-        return sizeRepository.findByValue(value);
-    }
-
-    @Override
-    public void save(Size size) {
+    public void save(SizeRepr sizeRepr) {
+        Size size = (sizeRepr.getId() != null) ? sizeRepository.findById(sizeRepr.getId()).get() : new Size();
+        size.setValue(sizeRepr.getValue());
         sizeRepository.save(size);
     }
 
     @Override
     public void remove(int id) {
-        sizeRepository.delete(findById(id));
+        sizeRepository.findById(id).ifPresent(sizeRepository::delete);
     }
 }

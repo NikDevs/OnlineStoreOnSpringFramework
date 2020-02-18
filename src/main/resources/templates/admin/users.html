@@ -17,7 +17,7 @@
         <div class="card mb-4">
 
             <div class="card-body">
-                <form class="form-group" th:action="@{/admin/user/create}">
+                <form class="form-group" th:action="@{/admin/users/create}">
                     <button type="submit" class="btn btn-primary">Create new</button>
                 </form>
 
@@ -35,13 +35,15 @@
                     <tbody>
                     <tr th:each="usr : ${users}">
                         <td th:text="${usr.id}"></td>
-                        <td th:text="${usr.userName}">Admin</td>
+                        <td th:text="${usr.userName}"></td>
                         <td th:text="${usr.firstName}"></td>
                         <td th:text="${usr.lastName}"></td>
                         <td th:text="${usr.email}"></td>
                         <td>
-                            <a th:href="@{user/{id}/edit(id=${usr.id})}" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i></a>
-                            <a th:href="@{user/{id}/delete(id=${usr.id})}" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-trash"></i></a>
+                            <div th:if="${!usr.getRoles().contains(role_su)}">
+                                <a th:href="@{users/{id}/edit(id=${usr.id})}" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                <a th:href="@{users/{id}/delete(id=${usr.id})}" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-trash"></i></a>
+                            </div>
                         </td>
                     </tr>
                     </tbody>

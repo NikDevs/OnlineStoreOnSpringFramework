@@ -3,7 +3,7 @@ package nikdevs.onlinestore.config;
 import nikdevs.onlinestore.persist.repo.RoleRepository;
 import nikdevs.onlinestore.persist.repo.UserRepository;
 import nikdevs.onlinestore.service.interfaces.UserService;
-import nikdevs.onlinestore.service.UserServiceJpaImpl;
+import nikdevs.onlinestore.service.impl.UserServiceJpaImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                //.anyRequest().permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                 .formLogin()

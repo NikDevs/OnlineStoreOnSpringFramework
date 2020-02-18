@@ -12,10 +12,8 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer id;
-
     @Column
     private String name;
-
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
@@ -61,10 +59,5 @@ public class Role {
     @Override
     public int hashCode() {
         return Objects.hash(name);
-    }
-
-    @Override
-    public String toString() {
-        return name.replaceAll("ROLE_", "");
     }
 }
