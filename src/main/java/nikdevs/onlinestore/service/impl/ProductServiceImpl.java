@@ -57,8 +57,10 @@ public class ProductServiceImpl implements ProductService {
         product.setSizes(productRepr.getSizes()
                 .stream().map(sizeRepr -> sizeRepository.findById(sizeRepr.getId()).get()).collect(Collectors.toSet()));
 
-        if (productRepr.getNewPictures() != null) {
-            for (MultipartFile newPicture : productRepr.getNewPictures()) {
+        MultipartFile[] newPictures = productRepr.getNewPictures();
+        if (newPictures != null) {
+            for (MultipartFile newPicture : newPictures) {
+                if (newPicture.isEmpty()) continue;
                 if (product.getPictures() == null) {
                     product.setPictures(new ArrayList<>());
                 }
