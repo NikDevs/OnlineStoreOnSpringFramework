@@ -1,4 +1,4 @@
-package nikdevs.onlinestore.service;
+package nikdevs.onlinestore.service.impl;
 
 import nikdevs.onlinestore.persist.model.Role;
 import nikdevs.onlinestore.persist.model.User;
@@ -15,8 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,8 +48,7 @@ public class UserServiceJpaImpl implements UserService {
     @Transactional
     public SystemUser findByUserName(String username) {
         User user = userRepository.findOneByUserName(username);
-        return new SystemUser(user.getUserName(), user.getPassword(),
-                user.getFirstName(), user.getLastName(), user.getEmail(), user.getRoles());
+        return new SystemUser(user);
     }
 
     @Override
@@ -67,7 +64,7 @@ public class UserServiceJpaImpl implements UserService {
         user.setFirstName(systemUser.getFirstName());
         user.setLastName(systemUser.getLastName());
         user.setEmail(systemUser.getEmail());
-        user.setRoles(systemUser.getRoles());
+        user.setRoles(systemUser.getRoles().stream().map(roleRepr -> roleRepository.findById(roleRepr.getId()).get()).collect(Collectors.toSet()));
         userRepository.save(user);
         return true;
     }
@@ -80,10 +77,16 @@ public class UserServiceJpaImpl implements UserService {
             throw new UsernameNotFoundException("Invalid username or password");
         }
         return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
-                mapRolesToAuthorities(user.getRoles()));
+                mapRolesToAuthorities(user.getRoles().stream().map(roleRepr -> roleRepository.findById(roleRepr.getId()).get()).collect(Collectors.toSet())));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void remove(Long id) {
+        userRepository.findById(id).ifPresent(userRepository::delete);
     }
 }

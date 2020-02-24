@@ -1,32 +1,26 @@
 package nikdevs.onlinestore.service.model;
 
-import nikdevs.onlinestore.persist.model.Role;
 import nikdevs.onlinestore.persist.model.User;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class SystemUser {
 
     private Long id;
-
     private String userName;
-
     private String password;
-
     private String firstName;
-
     private String lastName;
-
     private String email;
-
-    private Set<Role> roles;
+    private Set<RoleRepr> roles;
 
     public SystemUser() {
 
     }
 
     public SystemUser(String userName, String password, String firstName,
-                      String lastName, String email, Set<Role> roles) {
+                      String lastName, String email, Set<RoleRepr> roles) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
@@ -38,10 +32,11 @@ public class SystemUser {
     public SystemUser(User user) {
         this.id = user.getId();
         this.userName = user.getUserName();
+        this.password = user.getPassword();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
-        this.roles = user.getRoles();
+        this.roles = user.getRoles().stream().map(RoleRepr::new).collect(Collectors.toSet());
     }
 
     public Long getId() {
@@ -92,11 +87,11 @@ public class SystemUser {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
+    public Set<RoleRepr> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<RoleRepr> roles) {
         this.roles = roles;
     }
 }

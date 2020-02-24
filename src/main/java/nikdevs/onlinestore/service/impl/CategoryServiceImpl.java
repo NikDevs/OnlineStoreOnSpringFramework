@@ -1,8 +1,9 @@
-package nikdevs.onlinestore.service;
+package nikdevs.onlinestore.service.impl;
 
 import nikdevs.onlinestore.persist.model.Category;
 import nikdevs.onlinestore.persist.repo.CategoryRepository;
 import nikdevs.onlinestore.service.interfaces.CategoryService;
+import nikdevs.onlinestore.service.model.CategoryRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,29 +21,26 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
+    public List<CategoryRepr> findAll() {
+        return categoryRepository.findAllCategoryRepr();
     }
 
     @Override
-    public Category findById(int id) {
-        return categoryRepository.getOne(id);
-    }
-
-    @Override
-    public Category findByName(String name) {
-        return categoryRepository.findByName(name);
+    public CategoryRepr findById(int id) {
+        return new CategoryRepr(categoryRepository.findById(id).get());
     }
 
     @Override
     @Transactional
-    public void save(Category category) {
+    public void save(CategoryRepr categoryRepr) {
+        Category category = (categoryRepr.getId() != null) ? categoryRepository.findById(categoryRepr.getId()).get() : new Category();
+        category.setName(categoryRepr.getName());
         categoryRepository.save(category);
     }
 
     @Override
     @Transactional
     public void remove(int id) {
-        categoryRepository.delete(findById(id));
+        categoryRepository.findById(id).ifPresent(categoryRepository::delete);
     }
 }

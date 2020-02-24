@@ -1,16 +1,14 @@
 package nikdevs.onlinestore.service.interfaces;
 
 import nikdevs.onlinestore.persist.model.Category;
-import org.springframework.stereotype.Service;
+import nikdevs.onlinestore.service.model.CategoryRepr;
 
 import java.util.List;
 
-@Service
 public interface CategoryService {
 
-    List<Category> findAll();
-    Category findById(int id);
-    Category findByName(String name);
-    void save(Category category);
+    List<CategoryRepr> findAll();
+    CategoryRepr findById(int id);
+    void save(CategoryRepr categoryRepr);
     void remove(int id);
 }
