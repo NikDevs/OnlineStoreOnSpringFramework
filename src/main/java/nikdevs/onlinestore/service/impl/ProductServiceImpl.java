@@ -1,5 +1,6 @@
 package nikdevs.onlinestore.service.impl;
 
+import nikdevs.onlinestore.aspect.TrackTime;
 import nikdevs.onlinestore.persist.model.*;
 import nikdevs.onlinestore.persist.repo.BrandRepository;
 import nikdevs.onlinestore.persist.repo.CategoryRepository;
@@ -35,16 +36,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @TrackTime
     public List<ProductRepr> findAll() {
         return productRepository.findAll().stream().map(ProductRepr::new).collect(Collectors.toList());
     }
 
     @Override
+    @TrackTime
     public ProductRepr findById(long id) {
         return new ProductRepr(productRepository.findById(id).get());
     }
 
     @Override
+    @TrackTime
     @Transactional
     public void save(ProductRepr productRepr) throws IOException {
         Product product = (productRepr.getId() != null) ? productRepository.findById(productRepr.getId()).get() : new Product();
@@ -73,6 +77,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @TrackTime
     @Transactional
     public void remove(long id) {
         productRepository.findById(id).ifPresent(productRepository::delete);

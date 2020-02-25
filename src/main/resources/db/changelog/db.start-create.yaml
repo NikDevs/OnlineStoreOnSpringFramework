@@ -194,7 +194,7 @@ databaseChangeLog:
                   type: varchar(512)
               - column:
                   name: price
-                  type: DOUBLE PRECISION
+                  type: DECIMAL(19, 2)
               - column:
                   name: category_id
                   type: BIGINT
@@ -300,8 +300,15 @@ databaseChangeLog:
                     references: products(id)
                     nullable: false
               - column:
+                  name: size_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_size_id
+                    references: sizes(id)
+                    nullable: false
+              - column:
                   name: price
-                  type: DOUBLE PRECISION
+                  type: DECIMAL(19, 2)
                   constraints:
                     nullable: false
               - column:

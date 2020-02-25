@@ -43,7 +43,7 @@
                             <li>
                                 <a th:href="@{/cart}" class="site-cart">
                                     <span class="icon icon-shopping_cart"></span>
-                                    <span class="count">2</span>
+                                    <span th:text="${@cartService.itemsQty}" class="count">2</span>
                                 </a>
                             </li>
                         </ul>

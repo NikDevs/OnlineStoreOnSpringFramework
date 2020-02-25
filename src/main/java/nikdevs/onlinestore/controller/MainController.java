@@ -1,8 +1,12 @@
 package nikdevs.onlinestore.controller;
 
+import nikdevs.onlinestore.service.interfaces.CartService;
+import nikdevs.onlinestore.service.interfaces.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -11,14 +15,22 @@ public class MainController {
 
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
+    private ProductService productService;
+    private CartService cartService;
+
+    @Autowired
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @Autowired
+    public void setCartService(CartService cartService) {
+        this.cartService = cartService;
+    }
+
     @GetMapping("/")
     public String indexPage() {
         return "index";
-    }
-
-    @GetMapping("/cart")
-    public String cartPage() {
-        return "cart";
     }
 
     @GetMapping("/checkout")
@@ -26,14 +38,9 @@ public class MainController {
         return "checkout";
     }
 
-    @GetMapping("/product/{id}")
-    public String productPage(@PathVariable("id") Long id) {
-        logger.info("Product {} page", id);
-        return "product";
-    }
-
     @GetMapping("/shop")
-    public String storePage() {
+    public String storePage(Model model) {
+        model.addAttribute("products", productService.findAll());
         return "shop";
     }
 }

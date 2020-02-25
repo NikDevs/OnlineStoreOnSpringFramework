@@ -3,6 +3,7 @@ package nikdevs.onlinestore.service.model;
 import nikdevs.onlinestore.persist.model.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,7 +14,7 @@ public class ProductRepr {
     private String code;
     private String name;
     private String description;
-    private Double price;
+    private BigDecimal price;
     private CategoryRepr category;
     private BrandRepr brand;
     private Set<SizeRepr> sizes;
@@ -67,11 +68,11 @@ public class ProductRepr {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -113,5 +114,9 @@ public class ProductRepr {
 
     public void setNewPictures(MultipartFile[] newPictures) {
         this.newPictures = newPictures;
+    }
+
+    public String getSizesString() {
+        return getSizes().stream().map(SizeRepr::toString).collect(Collectors.joining(", "));
     }
 }

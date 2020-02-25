@@ -1,5 +1,6 @@
 package nikdevs.onlinestore.service.impl;
 
+import nikdevs.onlinestore.aspect.TrackTime;
 import nikdevs.onlinestore.persist.model.Category;
 import nikdevs.onlinestore.persist.repo.CategoryRepository;
 import nikdevs.onlinestore.service.interfaces.CategoryService;
@@ -10,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service(value = "categoryService")
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepository;
@@ -21,16 +22,19 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @TrackTime
     public List<CategoryRepr> findAll() {
         return categoryRepository.findAllCategoryRepr();
     }
 
     @Override
+    @TrackTime
     public CategoryRepr findById(int id) {
         return new CategoryRepr(categoryRepository.findById(id).get());
     }
 
     @Override
+    @TrackTime
     @Transactional
     public void save(CategoryRepr categoryRepr) {
         Category category = (categoryRepr.getId() != null) ? categoryRepository.findById(categoryRepr.getId()).get() : new Category();
@@ -39,6 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @TrackTime
     @Transactional
     public void remove(int id) {
         categoryRepository.findById(id).ifPresent(categoryRepository::delete);

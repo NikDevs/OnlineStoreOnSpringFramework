@@ -1,5 +1,6 @@
 package nikdevs.onlinestore.service.impl;
 
+import nikdevs.onlinestore.aspect.TrackTime;
 import nikdevs.onlinestore.persist.model.Role;
 import nikdevs.onlinestore.persist.repo.RoleRepository;
 import nikdevs.onlinestore.service.interfaces.RoleService;
@@ -20,11 +21,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @TrackTime
     public List<RoleRepr> findAll() {
         return roleRepository.findAllRoleRepr();
     }
 
     @Override
+    @TrackTime
     public List<RoleRepr> findAllWithOutSU() {
         List<RoleRepr> roles = findAll();
         roles.remove(findById(1));
@@ -32,11 +35,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @TrackTime
     public RoleRepr findById(int id) {
         return new RoleRepr(roleRepository.findById(id).get());
     }
 
     @Override
+    @TrackTime
     public void save(RoleRepr roleRepr) {
         Role role = (roleRepr.getId() != null) ? roleRepository.findById(roleRepr.getId()).get() : new Role();
         role.setName(roleRepr.getName());
@@ -44,6 +49,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @TrackTime
     public void remove(int id) {
         roleRepository.findById(id).ifPresent(roleRepository::delete);
     }
