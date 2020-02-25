@@ -37,7 +37,7 @@ public class ProductInfo {
         if (o == null || getClass() != o.getClass()) return false;
         ProductInfo that = (ProductInfo) o;
         return product.equals(that.product) &&
-                Objects.equals(size, that.size);
+                size.equals(that.size);
     }
 
     @Override

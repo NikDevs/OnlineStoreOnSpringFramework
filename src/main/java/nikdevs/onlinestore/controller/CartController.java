@@ -24,6 +24,12 @@ public class CartController {
     private ProductService productService;
     private SizeService sizeService;
 
+    private ProductInfo getProductInfo(long productId, int sizeId) {
+        ProductRepr productRepr = productService.findById(productId);
+        SizeRepr sizeRepr = sizeService.findById(sizeId);
+        return new ProductInfo(productRepr, sizeRepr);
+    }
+
     @Autowired
     public CartController(CartService cartService, ProductService productService, SizeService sizeService) {
         this.cartService = cartService;
@@ -37,13 +43,25 @@ public class CartController {
         return "cart";
     }
 
+    @GetMapping("/cart/{productId}/{sizeId}/addQty")
+    public String cartAddQtyProduct(@PathVariable("productId") long productId, @PathVariable("sizeId") int sizeId) {
+        ProductInfo productInfo = getProductInfo(productId, sizeId);
+        cartService.addItemQty(productInfo, 1);
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/cart/{productId}/{sizeId}/removeQty")
+    public String cartRemoveQtyProduct(@PathVariable("productId") long productId, @PathVariable("sizeId") int sizeId) {
+        ProductInfo productInfo = getProductInfo(productId, sizeId);
+        cartService.removeItemQty(productInfo, 1);
+        return "redirect:/cart";
+    }
+
     @GetMapping("/cart/{productId}/{sizeId}/delete")
     public String cartRemoveProduct(@PathVariable("productId") long productId, @PathVariable("sizeId") int sizeId) {
-        ProductRepr productRepr = productService.findById(productId);
-        SizeRepr sizeRepr = sizeService.findById(sizeId);
-        ProductInfo productInfo = new ProductInfo(productRepr, sizeRepr);
+        ProductInfo productInfo = getProductInfo(productId, sizeId);
         cartService.removeItem(productInfo);
-        return "cart";
+        return "redirect:/cart";
     }
 
     @PostMapping("/cart/update")

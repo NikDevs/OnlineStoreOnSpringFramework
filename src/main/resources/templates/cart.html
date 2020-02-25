@@ -46,15 +46,13 @@
                                 <td>
                                     <div class="input-group mb-3" style="max-width: 120px;">
                                         <div class="input-group-prepend">
-                                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;
-                                            </button>
+                                            <a th:href="@{/cart/{productId}/{sizeId}/removeQty(productId=${cartProd.key.product.id}, sizeId=${cartProd.key.size.id})}" class="btn btn-outline-primary">&minus;</a>
                                         </div>
                                         <input type="text" class="form-control text-center" th:value="${cartProd.value}" placeholder=""
                                                aria-label="Example text with button addon"
                                                aria-describedby="button-addon1">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;
-                                            </button>
+                                            <a th:href="@{/cart/{productId}/{sizeId}/addQty(productId=${cartProd.key.product.id}, sizeId=${cartProd.key.size.id})}" class="btn btn-outline-primary">&plus;</a>
                                         </div>
                                     </div>
                                 </td>
