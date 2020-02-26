@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="product (prod)" class="product">
+        <div class="block-4 text-center border">
+            <figure class="block-4-image">
+                <a th:href="@{/product/{id}(id=${prod.id})}">
+                    <img th:if="${!prod.pictures.isEmpty()}" th:src="@{/pictures/{pictureId}(pictureId=${prod.pictures[0].id})}" th:alt="${prod.name}" class="img-fluid">
+                </a>
+            </figure>
+            <div class="block-4-text p-4">
+                <h3><a th:href="@{/product/{id}(id=${prod.id})}" th:text="${prod.name}"></a></h3>
+                <p th:text="${prod.getSizesString()}" class="mb-0"></p>
+                <p class="text-primary font-weight-bold" th:text="'$' + ${prod.price}"></p>
+            </div>
+        </div>
+</div>
+</body>
+
+</html>

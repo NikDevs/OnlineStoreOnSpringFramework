@@ -4,7 +4,7 @@ import nikdevs.onlinestore.persist.model.Size;
 
 import java.util.Objects;
 
-public class SizeRepr {
+public class SizeRepr implements Comparable<SizeRepr> {
 
     private Integer id;
     private Integer value;
@@ -64,5 +64,12 @@ public class SizeRepr {
     @Override
     public String toString() {
         return value.toString();
+    }
+
+    @Override
+    public int compareTo(SizeRepr o) {
+        if (this.value >= o.value)
+            return 1;
+        return -1;
     }
 }

@@ -1,5 +1,6 @@
 package nikdevs.onlinestore.service.impl;
 
+import nikdevs.onlinestore.aspect.TrackTime;
 import nikdevs.onlinestore.persist.model.Role;
 import nikdevs.onlinestore.persist.model.User;
 import nikdevs.onlinestore.persist.repo.RoleRepository;
@@ -33,6 +34,7 @@ public class UserServiceJpaImpl implements UserService {
     }
 
     @Override
+    @TrackTime
     public List<SystemUser> findAll() {
         return userRepository.findAll().stream()
                 .map(SystemUser::new)
@@ -40,11 +42,13 @@ public class UserServiceJpaImpl implements UserService {
     }
 
     @Override
+    @TrackTime
     public SystemUser findById(Long id) {
         return new SystemUser(userRepository.findById(id).get());
     }
 
     @Override
+    @TrackTime
     @Transactional
     public SystemUser findByUserName(String username) {
         User user = userRepository.findOneByUserName(username);
@@ -52,6 +56,7 @@ public class UserServiceJpaImpl implements UserService {
     }
 
     @Override
+    @TrackTime
     @Transactional
     public boolean save(SystemUser systemUser) {
         User user = systemUser.getId() != null ? userRepository
@@ -70,6 +75,7 @@ public class UserServiceJpaImpl implements UserService {
     }
 
     @Override
+    @TrackTime
     @Transactional
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         SystemUser user = findByUserName(userName);
@@ -85,6 +91,7 @@ public class UserServiceJpaImpl implements UserService {
     }
 
     @Override
+    @TrackTime
     @Transactional
     public void remove(Long id) {
         userRepository.findById(id).ifPresent(userRepository::delete);

@@ -25,67 +25,38 @@
                             <tr>
                                 <th class="product-thumbnail">Image</th>
                                 <th class="product-name">Product</th>
+                                <th class="product-name">Size</th>
                                 <th class="product-price">Price</th>
                                 <th class="product-quantity">Quantity</th>
-                                <th class="product-total">Total</th>
                                 <th class="product-remove">Remove</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr th:each="cartProd : ${cartProducts}">
                                 <td class="product-thumbnail">
-                                    <img src="../static/images/cloth_1.jpg" alt="Image" class="img-fluid">
+                                    <img th:if="${!cartProd.key.product.pictures.isEmpty()}" class="img-fluid" th:src="@{/pictures/{pictureId}(pictureId=${cartProd.key.product.pictures[0].id})}"/>
                                 </td>
                                 <td class="product-name">
-                                    <h2 class="h5 text-black">Top Up T-Shirt</h2>
+                                    <h2 th:text="${cartProd.key.product.name}" class="h5 text-black"></h2>
                                 </td>
-                                <td>$49.00</td>
+                                <td class="product-name">
+                                    <h2 th:text="${cartProd.key.size}" class="h5 text-black"></h2>
+                                </td>
+                                <td th:text="'$' + ${cartProd.key.product.price}"></td>
                                 <td>
                                     <div class="input-group mb-3" style="max-width: 120px;">
                                         <div class="input-group-prepend">
-                                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;
-                                            </button>
+                                            <a th:href="@{/cart/{productId}/{sizeId}/removeQty(productId=${cartProd.key.product.id}, sizeId=${cartProd.key.size.id})}" class="btn btn-outline-primary">&minus;</a>
                                         </div>
-                                        <input type="text" class="form-control text-center" value="1" placeholder=""
+                                        <input type="text" class="form-control text-center" th:value="${cartProd.value}" placeholder=""
                                                aria-label="Example text with button addon"
                                                aria-describedby="button-addon1">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;
-                                            </button>
+                                            <a th:href="@{/cart/{productId}/{sizeId}/addQty(productId=${cartProd.key.product.id}, sizeId=${cartProd.key.size.id})}" class="btn btn-outline-primary">&plus;</a>
                                         </div>
                                     </div>
-
                                 </td>
-                                <td>$49.00</td>
-                                <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
-                            </tr>
-
-                            <tr>
-                                <td class="product-thumbnail">
-                                    <img src="../static/images/cloth_2.jpg" alt="Image" class="img-fluid">
-                                </td>
-                                <td class="product-name">
-                                    <h2 class="h5 text-black">Polo Shirt</h2>
-                                </td>
-                                <td>$49.00</td>
-                                <td>
-                                    <div class="input-group mb-3" style="max-width: 120px;">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control text-center" value="1" placeholder=""
-                                               aria-label="Example text with button addon"
-                                               aria-describedby="button-addon1">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </td>
-                                <td>$49.00</td>
-                                <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
+                                <td><a th:href="@{/cart/{productId}/{sizeId}/delete(productId=${cartProd.key.product.id}, sizeId=${cartProd.key.size.id})}" class="btn btn-primary btn-sm">X</a></td>
                             </tr>
                             </tbody>
                         </table>
@@ -96,23 +67,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="row mb-5">
-                        <div class="col-md-6 mb-3 mb-md-0">
-                            <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
-                        </div>
                         <div class="col-md-6">
-                            <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label class="text-black h4" for="coupon">Coupon</label>
-                            <p>Enter your coupon code if you have one.</p>
-                        </div>
-                        <div class="col-md-8 mb-3 mb-md-0">
-                            <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
-                        </div>
-                        <div class="col-md-4">
-                            <button class="btn btn-primary btn-sm">Apply Coupon</button>
+                            <a class="btn btn-outline-primary btn-sm btn-block" th:href="@{/shop}">Continue Shopping</a>
                         </div>
                     </div>
                 </div>
@@ -124,20 +80,12 @@
                                     <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <span class="text-black">Subtotal</span>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
-                                </div>
-                            </div>
                             <div class="row mb-5">
                                 <div class="col-md-6">
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
+                                    <strong th:text="'$' + ${@cartService.getSubTotal()}" class="text-black"></strong>
                                 </div>
                             </div>
 

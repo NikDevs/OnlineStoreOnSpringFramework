@@ -1,6 +1,7 @@
 package nikdevs.onlinestore.persist.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.*;
 
 @Entity
@@ -17,7 +18,7 @@ public class Product {
     @Column
     private String description;
     @Column
-    private Double price;
+    private BigDecimal price;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
@@ -28,7 +29,7 @@ public class Product {
                 joinColumns = @JoinColumn(name = "product_id"),
                 inverseJoinColumns = @JoinColumn(name = "size_id"))
     private Set<Size> sizes;
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(name = "products_pictures",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "picture_id"))
@@ -37,7 +38,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String code, String name, String description, double price, Category category, Brand brand, Set<Size> sizes, List<Picture> pictures) {
+    public Product(String code, String name, String description, BigDecimal price, Category category, Brand brand, Set<Size> sizes, List<Picture> pictures) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -80,11 +81,11 @@ public class Product {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
