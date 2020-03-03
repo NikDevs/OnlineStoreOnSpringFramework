@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header.html :: head"></head>
+<body>
+
+<div class="site-wrap">
+    <header th:replace="fragments/header.html :: header"></header>
+
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0">
+                    <a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_home'}">Home</a>
+                    <span class="mx-2 mb-0">/</span>
+                    <strong class="text-black">Registration</strong>
+                    <span class="mx-2 mb-0">/</span>
+                    <a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_basic'}">Basic Info</a>
+                    <span class="mx-2 mb-0">/</span>
+                    <strong class="text-black">Personal Info</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="h3 mb-3 text-black">New user personal information</h2>
+                </div>
+                <div class="col-md-7">
+                    <form class="p-3 p-lg-5 border" th:object="${personalInfo}" th:action="@{'~' + ${flowExecutionUrl} + '&_eventId_confirm'}"
+                          method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input class="form-control" type="text" th:field="*{firstName}" placeholder="First name">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" th:field="*{lastName}" placeholder="Last name">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Next</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <footer th:replace="fragments/footer.html :: footer"></footer>
+</div>
+
+<script th:replace="fragments/footer.html :: scripts"></script>
+
+</body>
+</html>

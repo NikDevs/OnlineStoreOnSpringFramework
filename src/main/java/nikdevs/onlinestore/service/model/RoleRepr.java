@@ -2,9 +2,10 @@ package nikdevs.onlinestore.service.model;
 
 import nikdevs.onlinestore.persist.model.Role;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class RoleRepr {
+public class RoleRepr implements Serializable {
 
     private Integer id;
     private String name;

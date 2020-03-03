@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header.html :: head"></head>
+<body>
+
+<div class="site-wrap">
+    <header th:replace="fragments/header.html :: header"></header>
+
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0">
+                    <a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_home'}">Home</a>
+                    <span class="mx-2 mb-0">/</span>
+                    <strong class="text-black">Registration</strong>
+                    <span class="mx-2 mb-0">/</span>
+                    <a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_basic'}">Basic Info</a>
+                    <span class="mx-2 mb-0">/</span>
+                    <a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_personal'}">Personal Info</a>
+                    <span class="mx-2 mb-0">/</span>
+                    <strong class="text-black">Confirm</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="h3 mb-3 text-black">Check and submit registration info</h2>
+                </div>
+                <div class="col-md-7">
+                    <form class="p-3 p-lg-5 border" th:object="${userRegisterModel}" th:action="@{'~' + ${flowExecutionUrl} + '&_eventId_submit'}"
+                          method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input class="form-control" type="text" th:field="*{basicUserInfo.email}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" th:field="*{basicUserInfo.username}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" th:field="*{personalUserInfo.firstName}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" th:field="*{personalUserInfo.lastName}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <footer th:replace="fragments/footer.html :: footer"></footer>
+</div>
+
+<script th:replace="fragments/footer.html :: scripts"></script>
+
+</body>
+</html>

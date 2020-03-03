@@ -1,6 +1,5 @@
 package nikdevs.onlinestore.service.interfaces;
 
-import nikdevs.onlinestore.persist.model.Category;
 import nikdevs.onlinestore.service.model.CategoryRepr;
 
 import java.util.List;

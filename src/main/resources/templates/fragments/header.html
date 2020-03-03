@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="head">
     <title>NikDevs Online Store</title>
@@ -39,7 +40,19 @@
                 <div class="col-6 col-md-4 order-3 order-md-3 text-right">
                     <div class="site-top-icons">
                         <ul>
-                            <li><a th:href="@{/login}"><span class="icon icon-person"></span></a></li>
+                            <li>
+                                <a th:href="@{/login}"><span class="icon icon-person"></span></a>
+                            </li>
+                            <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                                <span sec:authentication="name" id="dd_user" class="nav-link dropdown-toggle" data-toggle="dropdown"></span>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd_user">
+                                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}" class="dropdown-item">Admin</a>
+                                    <a th:href="@{/order}" class="dropdown-item">Orders</a>
+                                    <form th:action="@{/logout}" method="POST">
+                                        <input type="submit" class="dropdown-item" value="Logout"/>
+                                    </form>
+                                </div>
+                            </li>
                             <li>
                                 <a th:href="@{/cart}" class="site-cart">
                                     <span class="icon icon-shopping_cart"></span>
@@ -62,7 +75,17 @@
         </div>
     </nav>
 </header>
-
+<div th:fragment="navigation (pageName)" class="bg-light py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0">
+                <a th:href="@{/index}">Home</a>
+                <span class="mx-2 mb-0">/</span>
+                <strong th:text="${pageName}" class="text-black"></strong>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>

@@ -1,31 +1,27 @@
 package nikdevs.onlinestore.controller;
 
-import nikdevs.onlinestore.service.interfaces.CartService;
 import nikdevs.onlinestore.service.interfaces.ProductService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import nikdevs.onlinestore.service.interfaces.UserService;
+import nikdevs.onlinestore.service.model.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class MainController {
 
-    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-
     private ProductService productService;
-    private CartService cartService;
+    private  UserService userService;
 
     @Autowired
-    public void setProductService(ProductService productService) {
+    public MainController(ProductService productService, UserService userService) {
         this.productService = productService;
-    }
-
-    @Autowired
-    public void setCartService(CartService cartService) {
-        this.cartService = cartService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -33,14 +29,19 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/checkout")
-    public String checkoutPage() {
-        return "checkout";
-    }
-
     @GetMapping("/shop")
     public String storePage(Model model) {
         model.addAttribute("products", productService.findAll());
         return "shop";
+    }
+
+    public SystemUser getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+            SystemUser user = userService.findByUserName(userDetails.getUsername());
+            return user;
+        }
+        return null;
     }
 }

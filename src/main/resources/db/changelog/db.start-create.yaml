@@ -277,6 +277,26 @@ databaseChangeLog:
                   type: TIMESTAMP WITHOUT TIME ZONE
                   constraints:
                     nullable: false
+              - column:
+                  constraints:
+                    nullable: false
+                  name: country
+                  type: VARCHAR(50)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: zipcode
+                  type: VARCHAR(10)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: adress
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: additional_info
+                  type: VARCHAR(255)
 
   - changeSet:
       id: 12

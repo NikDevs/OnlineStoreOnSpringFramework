@@ -12,4 +12,5 @@ public interface UserService extends UserDetailsService {
     boolean save(SystemUser systemUser);
     List<SystemUser> findAll();
     void remove(Long id);
+    boolean existsUserByEmail(String email);
 }

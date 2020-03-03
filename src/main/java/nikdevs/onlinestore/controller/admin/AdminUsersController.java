@@ -1,6 +1,6 @@
 package nikdevs.onlinestore.controller.admin;
 
-import nikdevs.onlinestore.persist.model.Role;
+import nikdevs.onlinestore.controller.MainController;
 import nikdevs.onlinestore.persist.model.User;
 import nikdevs.onlinestore.service.interfaces.RoleService;
 import nikdevs.onlinestore.service.interfaces.UserService;
@@ -8,10 +8,6 @@ import nikdevs.onlinestore.service.model.RoleRepr;
 import nikdevs.onlinestore.service.model.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,32 +17,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class AdminUsersController {
 
     private final RoleService roleService;
     private final UserService userService;
+    private final MainController mainController;
 
     private static final String ADMIN_PAGE = AdminController.ADMIN_PAGE;
     private static final String PAGE = "users";
     private static final String PAGE_FORM = "user_form";
 
-    private SystemUser getCurrentUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!(auth instanceof AnonymousAuthenticationToken)) {
-            UserDetails userDetails = (UserDetails) auth.getPrincipal();
-            SystemUser user = userService.findByUserName(userDetails.getUsername());
-            return user;
-        }
-        return null;
-    }
-
     @Autowired
-    public AdminUsersController(RoleService roleService, @Lazy UserService userService) {
+    public AdminUsersController(RoleService roleService, @Lazy UserService userService, MainController mainController) {
         this.roleService = roleService;
         this.userService = userService;
+        this.mainController = mainController;
     }
 
     @GetMapping("/" + ADMIN_PAGE + "/" + PAGE)
@@ -59,7 +46,7 @@ public class AdminUsersController {
 
     @GetMapping("/" + ADMIN_PAGE + "/" + PAGE + "/{id}/edit")
     public String adminEdit(Model model, @PathVariable("id") Long id) {
-        SystemUser user = getCurrentUser();
+        SystemUser user = mainController.getCurrentUser();
         List<RoleRepr> roles;
         if (user != null && user.getRoles().contains(roleService.findById(1))) {
             roles = roleService.findAll();
@@ -75,7 +62,7 @@ public class AdminUsersController {
 
     @GetMapping("/" + ADMIN_PAGE + "/" + PAGE + "/editCurrent")
     public String adminEditCurrentUser() {
-        SystemUser user = getCurrentUser();
+        SystemUser user = mainController.getCurrentUser();
         if (user != null) {
             return "redirect:/" + ADMIN_PAGE + "/" + PAGE + "/" + user.getId() + "/edit";
         }

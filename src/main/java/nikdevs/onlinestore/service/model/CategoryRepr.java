@@ -2,7 +2,9 @@ package nikdevs.onlinestore.service.model;
 
 import nikdevs.onlinestore.persist.model.Category;
 
-public class CategoryRepr {
+import java.io.Serializable;
+
+public class CategoryRepr implements Serializable {
 
     private Integer id;
     private String name;

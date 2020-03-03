@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Service
-public class BrandServiceImpl implements BrandService {
+public class BrandServiceImpl implements BrandService, Serializable {
 
     private BrandRepository brandRepository;
 

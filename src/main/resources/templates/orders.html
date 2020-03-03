@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header.html :: head"></head>
+<body>
+
+<div class="site-wrap">
+    <header th:replace="fragments/header.html :: header"></header>
+
+    <<div th:replace="fragments/header.html :: navigation ('Orders')"></div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row mb-5">
+                <form class="col-md-12" method="post">
+                    <div class="site-blocks-table">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th class="product-thumbnail">№</th>
+                                <th class="product-name">Date</th>
+                                <th class="product-name">Products</th>
+                                <th class="product-price">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="order : ${orders}">
+                                <td class="product-name">
+                                    <a th:href="@{/order/{id}(id=${order.id})}" th:text="${order.id}" class="h5 text-black"></a>
+                                </td>
+                                <td class="product-name">
+                                    <h2 th:text="${order.date}" class="h5 text-black"></h2>
+                                </td>
+                                <td class="product-name">
+                                    <h2 th:text="${order.productCount}" class="h5 text-black"></h2>
+                                </td>
+                                <td class="product-name">
+                                    <h2 th:text="'$' + ${order.total}" class="h5 text-black"></h2>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+  <footer th:replace="fragments/footer.html :: footer"></footer>
+</div>
+
+<script th:replace="fragments/footer.html :: scripts"></script>
+
+</body>
+</html>

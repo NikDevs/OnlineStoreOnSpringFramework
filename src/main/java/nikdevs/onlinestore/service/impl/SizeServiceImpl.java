@@ -8,11 +8,12 @@ import nikdevs.onlinestore.service.model.SizeRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
 @Service(value = "sizeService")
-public class SizeServiceImpl implements SizeService {
+public class SizeServiceImpl implements SizeService, Serializable {
 
     private SizeRepository sizeRepository;
 

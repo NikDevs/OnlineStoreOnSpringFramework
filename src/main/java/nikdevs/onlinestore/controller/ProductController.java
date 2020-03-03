@@ -20,7 +20,6 @@ public class ProductController {
     @GetMapping("/product/{id}")
     public String productPage(Model model, @PathVariable("id") Long id) {
         model.addAttribute("product", productService.findById(id));
-        model.addAttribute("products", productService.findAll());
         return "product";
     }
 }

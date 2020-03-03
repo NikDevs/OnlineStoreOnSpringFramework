@@ -15,11 +15,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.transaction.Transactional;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserServiceJpaImpl implements UserService {
+public class UserServiceJpaImpl implements UserService, Serializable {
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
@@ -95,5 +96,11 @@ public class UserServiceJpaImpl implements UserService {
     @Transactional
     public void remove(Long id) {
         userRepository.findById(id).ifPresent(userRepository::delete);
+    }
+
+    @Override
+    @TrackTime
+    public boolean existsUserByEmail(String email) {
+        return userRepository.existsUserByEmail(email);
     }
 }

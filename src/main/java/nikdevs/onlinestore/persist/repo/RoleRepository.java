@@ -14,4 +14,6 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
             "left join r.users u " +
             "group by r.id, r.name")
     List<RoleRepr> findAllRoleRepr();
+
+    Role findByName(String name);
 }
