@@ -2,9 +2,10 @@ package nikdevs.onlinestore.service.model;
 
 import nikdevs.onlinestore.persist.model.Size;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class SizeRepr implements Comparable<SizeRepr> {
+public class SizeRepr implements Comparable<SizeRepr>, Serializable {
 
     private Integer id;
     private Integer value;

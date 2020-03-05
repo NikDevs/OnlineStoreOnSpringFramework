@@ -1,8 +1,9 @@
 package nikdevs.onlinestore.service.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ProductInfo {
+public class ProductInfo implements Serializable {
 
     private ProductRepr product;
     private SizeRepr size;

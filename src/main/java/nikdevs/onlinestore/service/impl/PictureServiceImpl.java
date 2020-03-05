@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
+
 @Service
-public class PictureServiceImpl implements PictureService {
+public class PictureServiceImpl implements PictureService, Serializable {
 
     private PictureRepository pictureRepository;
 

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header.html :: head"></head>
+<body>
+
+<div th:object="${order}" class="site-wrap">
+    <header th:replace="fragments/header.html :: header"></header>
+
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0">
+                    <a th:href="@{/index}">Home</a>
+                    <span class="mx-2 mb-0">/</span>
+                    <a th:href="@{/order}">Orders</a>
+                    <span class="mx-2 mb-0">/</span>
+                    <strong th:text="'Order ' + *{id}" class="text-black"></strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row mb-5">
+                <form class="col-md-12" method="post">
+                    <div class="site-blocks-table">
+                        <h2 th:text="'ID: ' + *{id}" class="text-black"></h2>
+                        <h3 th:text="'Date: ' + *{date}" class="text-black"></h3>
+                        <h3 th:text="'Country: ' + *{country}" class="text-black"></h3>
+                        <h3 th:text="'Zipcode: ' + *{zipcode}" class="text-black"></h3>
+                        <h3 th:text="'Adress: ' + *{adress}" class="text-black"></h3>
+                        <h3 th:text="'Additional info: ' + *{additionalInfo}" class="text-black"></h3>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th class="product-thumbnail">Image</th>
+                                <th class="product-name">Product</th>
+                                <th class="product-name">Size</th>
+                                <th class="product-price">Price</th>
+                                <th class="product-quantity">Quantity</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="prod : *{products}">
+                                <td class="product-thumbnail">
+                                    <img th:if="${!prod.product.pictures.isEmpty()}" class="img-fluid" th:src="@{/pictures/{pictureId}(pictureId=${prod.product.pictures[0].id})}"/>
+                                </td>
+                                <td class="product-name">
+                                    <h2 th:text="${prod.product.name}" class="h5 text-black"></h2>
+                                </td>
+                                <td class="product-name">
+                                    <h2 th:text="${prod.size}" class="h5 text-black"></h2>
+                                </td>
+                                <td th:text="'$' + ${prod.price}"></td>
+                                <td th:text="${prod.qnt}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row mb-5">
+                        <div class="col-md-6">
+                            <a class="btn btn-outline-primary btn-sm btn-block" th:href="@{/order}">Back to orders</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 pl-5">
+                    <div class="row justify-content-end">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-12 text-right border-bottom mb-5">
+                                    <h3 class="text-black h4 text-uppercase">Order Totals</h3>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-md-6">
+                                    <span class="text-black">Total</span>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <strong th:text="'$' + *{total}" class="text-black"></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <footer th:replace="fragments/footer.html :: footer"></footer>
+</div>
+
+<script th:replace="fragments/footer.html :: scripts"></script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header.html :: head"></head>
+<body>
+
+<div class="site-wrap">
+    <header th:replace="fragments/header.html :: header"></header>
+
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0">
+                    <a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_home'}">Home</a>
+                    <span class="mx-2 mb-0">/</span>
+                    <strong class="text-black">Registration</strong>
+                    <span class="mx-2 mb-0">/</span>
+                    <strong class="text-black">Basic Info</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="h3 mb-3 text-black">New user password</h2>
+                </div>
+                <div class="col-md-7">
+                    <form class="p-3 p-lg-5 border" th:object="${basicInfo}" th:action="@{'~' + ${flowExecutionUrl} + '&_eventId_personal'}"
+                          method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input class="form-control" type="text" th:field="*{email}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" th:field="*{username}" placeholder="User name">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="password" th:field="*{password}" placeholder="Password">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="password" th:field="*{confirmPassword}" placeholder="Password">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></small>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Next</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <footer th:replace="fragments/footer.html :: footer"></footer>
+</div>
+
+<script th:replace="fragments/footer.html :: scripts"></script>
+
+</body>
+</html>

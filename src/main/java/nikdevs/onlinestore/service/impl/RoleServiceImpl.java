@@ -8,10 +8,11 @@ import nikdevs.onlinestore.service.model.RoleRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Service
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl implements RoleService, Serializable {
 
     private RoleRepository roleRepository;
 
@@ -38,6 +39,11 @@ public class RoleServiceImpl implements RoleService {
     @TrackTime
     public RoleRepr findById(int id) {
         return new RoleRepr(roleRepository.findById(id).get());
+    }
+
+    @Override
+    public RoleRepr findByName(String name) {
+        return new RoleRepr(roleRepository.findByName(name));
     }
 
     @Override

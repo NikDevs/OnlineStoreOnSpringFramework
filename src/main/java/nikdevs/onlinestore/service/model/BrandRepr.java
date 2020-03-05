@@ -2,7 +2,9 @@ package nikdevs.onlinestore.service.model;
 
 import nikdevs.onlinestore.persist.model.Brand;
 
-public class BrandRepr {
+import java.io.Serializable;
+
+public class BrandRepr implements Serializable {
 
     private Integer id;
     private String name;

@@ -9,6 +9,7 @@ public interface RoleService {
     List<RoleRepr> findAll();
     List<RoleRepr> findAllWithOutSU();
     RoleRepr findById(int id);
+    RoleRepr findByName(String name);
     void save(RoleRepr role);
     void remove(int id);
 }

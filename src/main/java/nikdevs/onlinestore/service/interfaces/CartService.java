@@ -14,4 +14,5 @@ public interface CartService {
     Map<ProductInfo, Integer> findAllItems();
     Integer getItemsQty();
     BigDecimal getSubTotal();
+    void clear();
 }

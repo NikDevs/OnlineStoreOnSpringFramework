@@ -1,11 +1,12 @@
 package nikdevs.onlinestore.persist.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "sizes")
-public class Size {
+public class Size implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
