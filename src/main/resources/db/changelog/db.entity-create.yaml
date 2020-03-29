@@ -1,0 +1,206 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.entity-create.yaml
+
+  - changeSet:
+      id: 1
+      author: NikDevs
+      comment: "Create category Man"
+      changes:
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: "Man"
+
+  - changeSet:
+      id: 2
+      author: NikDevs
+      comment: "Create category Woman"
+      changes:
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: "Woman"
+
+  - changeSet:
+      id: 3
+      author: NikDevs
+      comment: "Create category Child"
+      changes:
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: "Child"
+
+  - changeSet:
+      id: 4
+      author: NikDevs
+      comment: "Create brand Puma"
+      changes:
+        - insert:
+            tableName: brands
+            columns:
+              - column:
+                  name: name
+                  value: "Puma"
+
+  - changeSet:
+      id: 5
+      author: NikDevs
+      comment: "Create brand Adidas"
+      changes:
+        - insert:
+            tableName: brands
+            columns:
+              - column:
+                  name: name
+                  value: "Adidas"
+
+  - changeSet:
+      id: 6
+      author: NikDevs
+      comment: "Create brand Nike"
+      changes:
+        - insert:
+            tableName: brands
+            columns:
+              - column:
+                  name: name
+                  value: "Nike"
+
+  - changeSet:
+      id: 7
+      author: NikDevs
+      comment: "Create size 35"
+      changes:
+        - insert:
+            tableName: sizes
+            columns:
+              - column:
+                  name: value
+                  value: "35"
+
+  - changeSet:
+      id: 8
+      author: NikDevs
+      comment: "Create size 36"
+      changes:
+        - insert:
+            tableName: sizes
+            columns:
+              - column:
+                  name: value
+                  value: "36"
+
+  - changeSet:
+      id: 9
+      author: NikDevs
+      comment: "Create size 37"
+      changes:
+        - insert:
+            tableName: sizes
+            columns:
+              - column:
+                  name: value
+                  value: "37"
+
+  - changeSet:
+      id: 10
+      author: NikDevs
+      comment: "Create size 38"
+      changes:
+        - insert:
+            tableName: sizes
+            columns:
+              - column:
+                  name: value
+                  value: "38"
+
+  - changeSet:
+      id: 11
+      author: NikDevs
+      comment: "Create size 39"
+      changes:
+        - insert:
+            tableName: sizes
+            columns:
+              - column:
+                  name: value
+                  value: "39"
+
+  - changeSet:
+      id: 12
+      author: NikDevs
+      comment: "Create size 40"
+      changes:
+        - insert:
+            tableName: sizes
+            columns:
+              - column:
+                  name: value
+                  value: "40"
+
+  - changeSet:
+      id: 13
+      author: NikDevs
+      comment: "Create size 41"
+      changes:
+        - insert:
+            tableName: sizes
+            columns:
+              - column:
+                  name: value
+                  value: "41"
+
+  - changeSet:
+      id: 14
+      author: NikDevs
+      comment: "Create size 42"
+      changes:
+        - insert:
+            tableName: sizes
+            columns:
+              - column:
+                  name: value
+                  value: "42"
+
+  - changeSet:
+      id: 15
+      author: NikDevs
+      comment: "Create size 43"
+      changes:
+        - insert:
+            tableName: sizes
+            columns:
+              - column:
+                  name: value
+                  value: "43"
+
+  - changeSet:
+      id: 16
+      author: NikDevs
+      comment: "Create size 44"
+      changes:
+        - insert:
+            tableName: sizes
+            columns:
+              - column:
+                  name: value
+                  value: "44"
+
+  - changeSet:
+      id: 17
+      author: NikDevs
+      comment: "Create size 45"
+      changes:
+        - insert:
+            tableName: sizes
+            columns:
+              - column:
+                  name: value
+                  value: "45"

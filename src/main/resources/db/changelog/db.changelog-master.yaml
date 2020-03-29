@@ -5,9 +5,13 @@ databaseChangeLog:
       file: db.start-create.yaml
       relativeToChangelogFile: true
 
+  - include:
+      file: db.entity-create.yaml
+      relativeToChangelogFile: true
+
   - changeSet:
-      id: start-create
+      id: master-create
       author: NikDevs
       changes:
         - tagDatabase:
-            tag: start-create
+            tag: master-create
