@@ -10,35 +10,16 @@
 
     <div class="site-section">
         <div class="container">
-
             <div class="row mb-5">
                 <div class="col-md-9 order-2">
-
                     <div class="row">
                         <div class="col-md-12 mb-5">
                             <div class="float-md-left mb-4"><h2 class="text-black h5">Shop All</h2></div>
                         </div>
                     </div>
                     <div class="row mb-5">
-
                         <div th:each="prod : ${products}" class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                             <div th:replace="fragments/shop_product.html :: product (${prod})"></div>
-                        </div>
-
-                    </div>
-                    <div class="row" data-aos="fade-up">
-                        <div class="col-md-12 text-center">
-                            <div class="site-block-27">
-                                <ul>
-                                    <li><a href="#">&lt;</a></li>
-                                    <li class="active"><span>1</span></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">&gt;</a></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,15 +32,7 @@
                                 <span th:text="${cat.productCount}" class="text-black ml-auto"></span></a></li>
                         </ul>
                     </div>
-
                     <div class="border p-4 rounded mb-4">
-                        <div class="mb-4">
-                            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
-                            <div id="slider-range" class="border-primary"></div>
-                            <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white"
-                                   disabled=""/>
-                        </div>
-
                         <div class="mb-4">
                             <h3 class="mb-3 h6 text-uppercase text-black d-block">Size</h3>
                             <div th:each="size : ${@sizeService.findAll()}">
@@ -72,7 +45,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
