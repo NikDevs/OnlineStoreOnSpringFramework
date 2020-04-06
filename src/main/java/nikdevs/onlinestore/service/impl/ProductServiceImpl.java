@@ -7,7 +7,7 @@ import nikdevs.onlinestore.persist.repo.CategoryRepository;
 import nikdevs.onlinestore.persist.repo.ProductRepository;
 import nikdevs.onlinestore.persist.repo.SizeRepository;
 import nikdevs.onlinestore.service.interfaces.ProductService;
-import nikdevs.onlinestore.service.model.ProductRepr;
+import nikdevs.onlinestore.service.repr.ProductRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService, Serializable {
 
     @Override
     @TrackTime
-    public ProductRepr findById(long id) {
+    public ProductRepr findById(Long id) {
         return new ProductRepr(productRepository.findById(id).get());
     }
 
@@ -80,7 +80,7 @@ public class ProductServiceImpl implements ProductService, Serializable {
     @Override
     @TrackTime
     @Transactional
-    public void remove(long id) {
+    public void remove(Long id) {
         productRepository.findById(id).ifPresent(productRepository::delete);
     }
 }

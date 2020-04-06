@@ -1,7 +1,7 @@
 package nikdevs.onlinestore.controller.admin;
 
 import nikdevs.onlinestore.service.interfaces.RoleService;
-import nikdevs.onlinestore.service.model.RoleRepr;
+import nikdevs.onlinestore.service.repr.RoleRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,13 +29,13 @@ public class AdminRolesController {
     public String adminListPage(Model model) {
         model.addAttribute("activePage", PAGE);
         model.addAttribute("roles", roleService.findAll());
-        RoleRepr role_su = roleService.findById(1);
+        RoleRepr role_su = roleService.findById(1L);
         model.addAttribute("role_su", role_su);
         return ADMIN_PAGE + "/" + PAGE;
     }
 
     @GetMapping("/" + ADMIN_PAGE + "/" + PAGE + "/{id}/edit")
-    public String adminEdit(Model model, @PathVariable("id") Integer id) {
+    public String adminEdit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("edit", true);
         model.addAttribute("activePage", PAGE);
         model.addAttribute("role", roleService.findById(id));
@@ -43,7 +43,7 @@ public class AdminRolesController {
     }
 
     @GetMapping("/" + ADMIN_PAGE + "/" + PAGE + "/{id}/delete")
-    public String adminDelete(Model model, @PathVariable("id") Integer id) {
+    public String adminDelete(Model model, @PathVariable("id") Long id) {
         roleService.remove(id);
         model.addAttribute("activePage", PAGE);
         return "redirect:/" + ADMIN_PAGE + "/" + PAGE;

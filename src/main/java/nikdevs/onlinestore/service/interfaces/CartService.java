@@ -1,7 +1,7 @@
 package nikdevs.onlinestore.service.interfaces;
 
 
-import nikdevs.onlinestore.service.model.ProductInfo;
+import nikdevs.onlinestore.service.repr.ProductInfo;
 
 import java.math.BigDecimal;
 import java.util.Map;

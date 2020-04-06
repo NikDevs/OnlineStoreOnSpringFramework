@@ -1,13 +1,11 @@
-package nikdevs.onlinestore.service.model;
+package nikdevs.onlinestore.service.repr;
 
 import nikdevs.onlinestore.persist.model.OrderedProduct;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class OrderedProductRepr implements Serializable {
+public class OrderedProductRepr extends StandartRepr {
 
-    private Long id;
     private ProductRepr product;
     private SizeRepr size;
     private BigDecimal price;

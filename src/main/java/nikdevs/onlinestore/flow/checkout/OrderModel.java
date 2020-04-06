@@ -1,6 +1,6 @@
 package nikdevs.onlinestore.flow.checkout;
 
-import nikdevs.onlinestore.service.model.SystemUser;
+import nikdevs.onlinestore.service.repr.SystemUser;
 
 import java.io.Serializable;
 

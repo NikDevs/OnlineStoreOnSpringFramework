@@ -4,7 +4,7 @@ import nikdevs.onlinestore.aspect.TrackTime;
 import nikdevs.onlinestore.persist.model.Role;
 import nikdevs.onlinestore.persist.repo.RoleRepository;
 import nikdevs.onlinestore.service.interfaces.RoleService;
-import nikdevs.onlinestore.service.model.RoleRepr;
+import nikdevs.onlinestore.service.repr.RoleRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +31,13 @@ public class RoleServiceImpl implements RoleService, Serializable {
     @TrackTime
     public List<RoleRepr> findAllWithOutSU() {
         List<RoleRepr> roles = findAll();
-        roles.remove(findById(1));
+        roles.remove(findById(1L));
         return roles;
     }
 
     @Override
     @TrackTime
-    public RoleRepr findById(int id) {
+    public RoleRepr findById(Long id) {
         return new RoleRepr(roleRepository.findById(id).get());
     }
 
@@ -56,7 +56,7 @@ public class RoleServiceImpl implements RoleService, Serializable {
 
     @Override
     @TrackTime
-    public void remove(int id) {
+    public void remove(Long id) {
         roleRepository.findById(id).ifPresent(roleRepository::delete);
     }
 }

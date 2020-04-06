@@ -1,34 +1,31 @@
-package nikdevs.onlinestore.service.model;
+package nikdevs.onlinestore.service.repr;
 
-import nikdevs.onlinestore.persist.model.Brand;
+import nikdevs.onlinestore.persist.model.Category;
 
-import java.io.Serializable;
+public class CategoryRepr extends StandartRepr {
 
-public class BrandRepr implements Serializable {
-
-    private Integer id;
     private String name;
     private Long productCount;
 
-    public BrandRepr() {
+    public CategoryRepr() {
     }
 
-    public BrandRepr(Brand brand) {
-        this.id = brand.getId();
-        this.name = brand.getName();
+    public CategoryRepr(Category category) {
+        this.id = category.getId();
+        this.name = category.getName();
     }
 
-    public BrandRepr(Integer id, String name, Long productCount) {
+    public CategoryRepr(Long id, String name, Long productCount) {
         this.id = id;
         this.name = name;
         this.productCount = productCount;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

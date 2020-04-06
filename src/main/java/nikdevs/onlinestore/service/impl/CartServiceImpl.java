@@ -1,7 +1,7 @@
 package nikdevs.onlinestore.service.impl;
 
 import nikdevs.onlinestore.service.interfaces.CartService;
-import nikdevs.onlinestore.service.model.ProductInfo;
+import nikdevs.onlinestore.service.repr.ProductInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 

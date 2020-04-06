@@ -6,7 +6,7 @@ import nikdevs.onlinestore.persist.model.User;
 import nikdevs.onlinestore.persist.repo.RoleRepository;
 import nikdevs.onlinestore.persist.repo.UserRepository;
 import nikdevs.onlinestore.service.interfaces.UserService;
-import nikdevs.onlinestore.service.model.SystemUser;
+import nikdevs.onlinestore.service.repr.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

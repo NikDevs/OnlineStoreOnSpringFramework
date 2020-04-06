@@ -1,16 +1,12 @@
 package nikdevs.onlinestore.persist.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "categories")
-public class Category implements Serializable {
+public class Category extends StandartEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     @Column
     private String name;
     @OneToMany(mappedBy = "category")
@@ -21,14 +17,6 @@ public class Category implements Serializable {
 
     public Category(String name) {
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

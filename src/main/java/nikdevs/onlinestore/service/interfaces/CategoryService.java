@@ -1,13 +1,13 @@
 package nikdevs.onlinestore.service.interfaces;
 
-import nikdevs.onlinestore.service.model.CategoryRepr;
+import nikdevs.onlinestore.service.repr.CategoryRepr;
 
 import java.util.List;
 
 public interface CategoryService {
 
     List<CategoryRepr> findAll();
-    CategoryRepr findById(int id);
+    CategoryRepr findById(Long id);
     void save(CategoryRepr categoryRepr);
-    void remove(int id);
+    void remove(Long id);
 }

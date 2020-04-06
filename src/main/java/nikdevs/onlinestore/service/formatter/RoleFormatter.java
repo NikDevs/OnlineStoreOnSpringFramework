@@ -1,7 +1,7 @@
 package nikdevs.onlinestore.service.formatter;
 
 import nikdevs.onlinestore.service.interfaces.RoleService;
-import nikdevs.onlinestore.service.model.RoleRepr;
+import nikdevs.onlinestore.service.repr.RoleRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
@@ -21,11 +21,11 @@ public class RoleFormatter implements Formatter<RoleRepr> {
 
     @Override
     public RoleRepr parse(String s, Locale locale) throws ParseException {
-        return roleService.findById(Integer.parseInt(s));
+        return roleService.findById(Long.parseLong(s));
     }
 
     @Override
     public String print(RoleRepr roleRepr, Locale locale) {
-        return Integer.toString(roleRepr.getId());
+        return Long.toString(roleRepr.getId());
     }
 }

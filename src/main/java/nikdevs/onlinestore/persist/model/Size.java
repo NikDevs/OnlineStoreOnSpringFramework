@@ -1,16 +1,12 @@
 package nikdevs.onlinestore.persist.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "sizes")
-public class Size implements Serializable {
+public class Size extends StandartEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     @Column
     private int value;
     @ManyToMany(mappedBy = "sizes")
@@ -21,14 +17,6 @@ public class Size implements Serializable {
 
     public Size(int value) {
         this.value = value;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getValue() {

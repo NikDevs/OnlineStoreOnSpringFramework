@@ -4,7 +4,7 @@ import nikdevs.onlinestore.aspect.TrackTime;
 import nikdevs.onlinestore.persist.model.Size;
 import nikdevs.onlinestore.persist.repo.SizeRepository;
 import nikdevs.onlinestore.service.interfaces.SizeService;
-import nikdevs.onlinestore.service.model.SizeRepr;
+import nikdevs.onlinestore.service.repr.SizeRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class SizeServiceImpl implements SizeService, Serializable {
 
     @Override
     @TrackTime
-    public SizeRepr findById(int id) {
+    public SizeRepr findById(Long id) {
         return new SizeRepr(sizeRepository.findById(id).get());
     }
 
@@ -46,7 +46,7 @@ public class SizeServiceImpl implements SizeService, Serializable {
 
     @Override
     @TrackTime
-    public void remove(int id) {
+    public void remove(Long id) {
         sizeRepository.findById(id).ifPresent(sizeRepository::delete);
     }
 }

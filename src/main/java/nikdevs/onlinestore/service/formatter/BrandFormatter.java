@@ -1,7 +1,7 @@
 package nikdevs.onlinestore.service.formatter;
 
 import nikdevs.onlinestore.service.interfaces.BrandService;
-import nikdevs.onlinestore.service.model.BrandRepr;
+import nikdevs.onlinestore.service.repr.BrandRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
@@ -21,11 +21,11 @@ public class BrandFormatter implements Formatter<BrandRepr> {
 
     @Override
     public BrandRepr parse(String s, Locale locale) throws ParseException {
-        return brandService.findById(Integer.parseInt(s));
+        return brandService.findById(Long.parseLong(s));
     }
 
     @Override
     public String print(BrandRepr brandRepr, Locale locale) {
-        return Integer.toString(brandRepr.getId());
+        return Long.toString(brandRepr.getId());
     }
 }

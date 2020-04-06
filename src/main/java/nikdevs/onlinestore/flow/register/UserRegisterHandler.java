@@ -2,8 +2,8 @@ package nikdevs.onlinestore.flow.register;
 
 import nikdevs.onlinestore.service.interfaces.RoleService;
 import nikdevs.onlinestore.service.interfaces.UserService;
-import nikdevs.onlinestore.service.model.RoleRepr;
-import nikdevs.onlinestore.service.model.SystemUser;
+import nikdevs.onlinestore.service.repr.RoleRepr;
+import nikdevs.onlinestore.service.repr.SystemUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

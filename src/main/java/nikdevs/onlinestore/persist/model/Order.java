@@ -1,17 +1,13 @@
 package nikdevs.onlinestore.persist.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "orders")
-public class Order implements Serializable {
+public class Order extends StandartEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -29,14 +25,6 @@ public class Order implements Serializable {
     private String additionalInfo;
 
     public Order() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public User getUser() {

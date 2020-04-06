@@ -4,9 +4,9 @@ import nikdevs.onlinestore.persist.model.Order;
 import nikdevs.onlinestore.persist.model.OrderedProduct;
 import nikdevs.onlinestore.persist.repo.*;
 import nikdevs.onlinestore.service.interfaces.OrderService;
-import nikdevs.onlinestore.service.model.OrderRepr;
-import nikdevs.onlinestore.service.model.OrderedProductRepr;
-import nikdevs.onlinestore.service.model.SystemUser;
+import nikdevs.onlinestore.service.repr.OrderRepr;
+import nikdevs.onlinestore.service.repr.OrderedProductRepr;
+import nikdevs.onlinestore.service.repr.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderRepr findById(long id) {
+    public OrderRepr findById(Long id) {
         return new OrderRepr(orderRepository.findById(id).get());
     }
 
@@ -63,7 +63,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void remove(long id) {
+    public void remove(Long id) {
         orderRepository.findById(id).ifPresent(orderRepository::delete);
     }
 
