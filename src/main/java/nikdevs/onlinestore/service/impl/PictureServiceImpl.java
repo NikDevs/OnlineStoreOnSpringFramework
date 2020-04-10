@@ -22,7 +22,7 @@ public class PictureServiceImpl implements PictureService, Serializable {
 
     @Override
     @TrackTime
-    public Picture findById(long id) {
+    public Picture findById(Long id) {
         return pictureRepository.findById(id).get();
     }
 
@@ -36,7 +36,7 @@ public class PictureServiceImpl implements PictureService, Serializable {
     @Override
     @TrackTime
     @Transactional
-    public void remove(long id) {
+    public void remove(Long id) {
         pictureRepository.delete(findById(id));
     }
 }

@@ -4,7 +4,7 @@ import nikdevs.onlinestore.aspect.TrackTime;
 import nikdevs.onlinestore.persist.model.Category;
 import nikdevs.onlinestore.persist.repo.CategoryRepository;
 import nikdevs.onlinestore.service.interfaces.CategoryService;
-import nikdevs.onlinestore.service.model.CategoryRepr;
+import nikdevs.onlinestore.service.repr.CategoryRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService, Serializable {
 
     @Override
     @TrackTime
-    public CategoryRepr findById(int id) {
+    public CategoryRepr findById(Long id) {
         return new CategoryRepr(categoryRepository.findById(id).get());
     }
 
@@ -46,7 +46,7 @@ public class CategoryServiceImpl implements CategoryService, Serializable {
     @Override
     @TrackTime
     @Transactional
-    public void remove(int id) {
+    public void remove(Long id) {
         categoryRepository.findById(id).ifPresent(categoryRepository::delete);
     }
 }

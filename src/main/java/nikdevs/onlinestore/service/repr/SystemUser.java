@@ -1,14 +1,12 @@
-package nikdevs.onlinestore.service.model;
+package nikdevs.onlinestore.service.repr;
 
 import nikdevs.onlinestore.persist.model.User;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class SystemUser {
+public class SystemUser extends StandartRepr {
 
-    private Long id;
     private String userName;
     private String password;
     private String firstName;

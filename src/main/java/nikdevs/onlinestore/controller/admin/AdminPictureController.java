@@ -2,11 +2,8 @@ package nikdevs.onlinestore.controller.admin;
 
 import nikdevs.onlinestore.persist.model.Picture;
 import nikdevs.onlinestore.service.interfaces.PictureService;
-import nikdevs.onlinestore.service.interfaces.ProductService;
-import nikdevs.onlinestore.service.model.ProductRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 

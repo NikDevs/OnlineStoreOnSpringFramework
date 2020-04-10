@@ -4,7 +4,7 @@ import nikdevs.onlinestore.aspect.TrackTime;
 import nikdevs.onlinestore.persist.model.Brand;
 import nikdevs.onlinestore.persist.repo.BrandRepository;
 import nikdevs.onlinestore.service.interfaces.BrandService;
-import nikdevs.onlinestore.service.model.BrandRepr;
+import nikdevs.onlinestore.service.repr.BrandRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +30,7 @@ public class BrandServiceImpl implements BrandService, Serializable {
 
     @TrackTime
     @Override
-    public BrandRepr findById(int id) {
+    public BrandRepr findById(Long id) {
         return new BrandRepr(brandRepository.findById(id).get());
     }
 
@@ -46,7 +46,7 @@ public class BrandServiceImpl implements BrandService, Serializable {
     @Override
     @TrackTime
     @Transactional
-    public void remove(int id) {
+    public void remove(Long id) {
         brandRepository.findById(id).ifPresent(brandRepository::delete);
     }
 }

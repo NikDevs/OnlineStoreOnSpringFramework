@@ -1,16 +1,12 @@
 package nikdevs.onlinestore.persist.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "ordered_products")
-public class OrderedProduct implements Serializable {
+public class OrderedProduct extends StandartEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -34,14 +30,6 @@ public class OrderedProduct implements Serializable {
 
     public void setSize(Size size) {
         this.size = size;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Product getProduct() {

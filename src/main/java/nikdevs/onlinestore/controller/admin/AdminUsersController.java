@@ -4,8 +4,8 @@ import nikdevs.onlinestore.controller.MainController;
 import nikdevs.onlinestore.persist.model.User;
 import nikdevs.onlinestore.service.interfaces.RoleService;
 import nikdevs.onlinestore.service.interfaces.UserService;
-import nikdevs.onlinestore.service.model.RoleRepr;
-import nikdevs.onlinestore.service.model.SystemUser;
+import nikdevs.onlinestore.service.repr.RoleRepr;
+import nikdevs.onlinestore.service.repr.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class AdminUsersController {
     public String adminListPage(Model model) {
         model.addAttribute("activePage", "Users");
         model.addAttribute("users", userService.findAll());
-        model.addAttribute("role_su", roleService.findById(1));
+        model.addAttribute("role_su", roleService.findById(1L));
         return ADMIN_PAGE + "/" + PAGE;
     }
 
@@ -48,7 +48,7 @@ public class AdminUsersController {
     public String adminEdit(Model model, @PathVariable("id") Long id) {
         SystemUser user = mainController.getCurrentUser();
         List<RoleRepr> roles;
-        if (user != null && user.getRoles().contains(roleService.findById(1))) {
+        if (user != null && user.getRoles().contains(roleService.findById(1L))) {
             roles = roleService.findAll();
         } else {
             roles = roleService.findAllWithOutSU();

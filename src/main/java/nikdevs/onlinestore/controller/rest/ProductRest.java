@@ -1,9 +1,9 @@
 package nikdevs.onlinestore.controller.rest;
 
-import nikdevs.onlinestore.service.model.BrandRepr;
-import nikdevs.onlinestore.service.model.CategoryRepr;
-import nikdevs.onlinestore.service.model.ProductRepr;
-import nikdevs.onlinestore.service.model.SizeRepr;
+import nikdevs.onlinestore.service.repr.BrandRepr;
+import nikdevs.onlinestore.service.repr.CategoryRepr;
+import nikdevs.onlinestore.service.repr.ProductRepr;
+import nikdevs.onlinestore.service.repr.SizeRepr;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

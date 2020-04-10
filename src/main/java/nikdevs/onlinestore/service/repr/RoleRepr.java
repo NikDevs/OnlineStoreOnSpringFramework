@@ -1,13 +1,9 @@
-package nikdevs.onlinestore.service.model;
+package nikdevs.onlinestore.service.repr;
 
 import nikdevs.onlinestore.persist.model.Role;
 
-import java.io.Serializable;
-import java.util.Objects;
+public class RoleRepr extends StandartRepr {
 
-public class RoleRepr implements Serializable {
-
-    private Integer id;
     private String name;
     private Long userCount;
 
@@ -19,17 +15,17 @@ public class RoleRepr implements Serializable {
         this.name = role.getName();
     }
 
-    public RoleRepr(Integer id, String name, Long userCount) {
+    public RoleRepr(Long id, String name, Long userCount) {
         this.id = id;
         this.name = name;
         this.userCount = userCount;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -47,19 +43,6 @@ public class RoleRepr implements Serializable {
 
     public void setUserCount(Long userCount) {
         this.userCount = userCount;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RoleRepr roleRepr = (RoleRepr) o;
-        return id.equals(roleRepr.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 
     @Override

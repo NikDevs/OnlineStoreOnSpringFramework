@@ -1,4 +1,4 @@
-package nikdevs.onlinestore.service.model;
+package nikdevs.onlinestore.service.repr;
 
 import java.io.Serializable;
 import java.util.Objects;

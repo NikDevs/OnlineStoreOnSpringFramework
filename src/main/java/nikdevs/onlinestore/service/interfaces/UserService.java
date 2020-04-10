@@ -1,6 +1,6 @@
 package nikdevs.onlinestore.service.interfaces;
 
-import nikdevs.onlinestore.service.model.SystemUser;
+import nikdevs.onlinestore.service.repr.SystemUser;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;

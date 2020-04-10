@@ -1,7 +1,7 @@
 package nikdevs.onlinestore.service.formatter;
 
 import nikdevs.onlinestore.service.interfaces.CategoryService;
-import nikdevs.onlinestore.service.model.CategoryRepr;
+import nikdevs.onlinestore.service.repr.CategoryRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
@@ -21,11 +21,11 @@ public class CategoryFormatter implements Formatter<CategoryRepr> {
 
     @Override
     public CategoryRepr parse(String s, Locale locale) throws ParseException {
-        return categoryService.findById(Integer.parseInt(s));
+        return categoryService.findById(Long.parseLong(s));
     }
 
     @Override
     public String print(CategoryRepr categoryRepr, Locale locale) {
-        return Integer.toString(categoryRepr.getId());
+        return Long.toString(categoryRepr.getId());
     }
 }

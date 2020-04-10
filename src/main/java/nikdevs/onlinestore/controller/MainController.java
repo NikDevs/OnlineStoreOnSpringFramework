@@ -2,7 +2,7 @@ package nikdevs.onlinestore.controller;
 
 import nikdevs.onlinestore.service.interfaces.ProductService;
 import nikdevs.onlinestore.service.interfaces.UserService;
-import nikdevs.onlinestore.service.model.SystemUser;
+import nikdevs.onlinestore.service.repr.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;

@@ -1,7 +1,7 @@
 package nikdevs.onlinestore.controller.admin;
 
 import nikdevs.onlinestore.service.interfaces.SizeService;
-import nikdevs.onlinestore.service.model.SizeRepr;
+import nikdevs.onlinestore.service.repr.SizeRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +33,7 @@ public class AdminSizesController {
     }
 
     @GetMapping("/" + ADMIN_PAGE + "/" + PAGE + "/{id}/edit")
-    public String adminEdit(Model model, @PathVariable("id") Integer id) {
+    public String adminEdit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("edit", true);
         model.addAttribute("activePage", PAGE);
         model.addAttribute("size", sizeService.findById(id));
@@ -41,7 +41,7 @@ public class AdminSizesController {
     }
 
     @GetMapping("/" + ADMIN_PAGE + "/" + PAGE + "/{id}/delete")
-    public String adminDelete(Model model, @PathVariable("id") Integer id) {
+    public String adminDelete(Model model, @PathVariable("id") Long id) {
         sizeService.remove(id);
         model.addAttribute("activePage", PAGE);
         return "redirect:/" + ADMIN_PAGE + "/" + PAGE;

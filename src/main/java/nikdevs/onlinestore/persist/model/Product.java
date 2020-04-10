@@ -1,17 +1,13 @@
 package nikdevs.onlinestore.persist.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
 @Entity
 @Table(name = "products")
-public class Product implements Serializable {
+public class Product extends StandartEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column
     private String code;
     @Column
@@ -48,14 +44,6 @@ public class Product implements Serializable {
         this.brand = brand;
         this.sizes = sizes;
         this.pictures = pictures;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getCode() {

@@ -1,13 +1,13 @@
 package nikdevs.onlinestore.service.interfaces;
 
-import nikdevs.onlinestore.service.model.SizeRepr;
+import nikdevs.onlinestore.service.repr.SizeRepr;
 
 import java.util.List;
 
 public interface SizeService {
 
     List<SizeRepr> findAll();
-    SizeRepr findById(int id);
+    SizeRepr findById(Long id);
     void save(SizeRepr sizeRepr);
-    void remove(int id);
+    void remove(Long id);
 }

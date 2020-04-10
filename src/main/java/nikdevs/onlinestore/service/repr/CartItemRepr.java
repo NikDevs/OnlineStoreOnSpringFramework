@@ -1,8 +1,6 @@
-package nikdevs.onlinestore.service.model;
+package nikdevs.onlinestore.service.repr;
 
-import java.io.Serializable;
-
-public class CartItemRepr implements Serializable {
+public class CartItemRepr {
 
     private Long productId;
     private Integer qty;

@@ -1,17 +1,15 @@
-package nikdevs.onlinestore.service.model;
+package nikdevs.onlinestore.service.repr;
 
 
 import nikdevs.onlinestore.persist.model.Order;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderRepr implements Serializable {
+public class OrderRepr extends StandartRepr {
 
-    private Long id;
     private SystemUser user;
     private List<OrderedProductRepr> products;
     private Date date;

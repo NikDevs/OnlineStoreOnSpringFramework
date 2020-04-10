@@ -1,7 +1,7 @@
 package nikdevs.onlinestore.controller.admin;
 
 import nikdevs.onlinestore.service.interfaces.*;
-import nikdevs.onlinestore.service.model.ProductRepr;
+import nikdevs.onlinestore.service.repr.ProductRepr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

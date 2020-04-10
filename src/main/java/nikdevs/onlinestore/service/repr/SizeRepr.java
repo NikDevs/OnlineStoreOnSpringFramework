@@ -1,13 +1,9 @@
-package nikdevs.onlinestore.service.model;
+package nikdevs.onlinestore.service.repr;
 
 import nikdevs.onlinestore.persist.model.Size;
 
-import java.io.Serializable;
-import java.util.Objects;
+public class SizeRepr extends StandartRepr implements Comparable<SizeRepr> {
 
-public class SizeRepr implements Comparable<SizeRepr>, Serializable {
-
-    private Integer id;
     private Integer value;
     private Long productCount;
 
@@ -19,17 +15,17 @@ public class SizeRepr implements Comparable<SizeRepr>, Serializable {
         this.value = size.getValue();
     }
 
-    public SizeRepr(Integer id, Integer value, Long productCount) {
+    public SizeRepr(Long id, Integer value, Long productCount) {
         this.id = id;
         this.value = value;
         this.productCount = productCount;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -47,19 +43,6 @@ public class SizeRepr implements Comparable<SizeRepr>, Serializable {
 
     public void setProductCount(Long productCount) {
         this.productCount = productCount;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SizeRepr sizeRepr = (SizeRepr) o;
-        return id.equals(sizeRepr.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 
     @Override

@@ -1,16 +1,10 @@
 package nikdevs.onlinestore.persist.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
-
 
 @Entity
 @Table(name = "pictures_data")
-public class PictureData implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class PictureData extends StandartEntity {
 
     @Column(nullable = false, columnDefinition="MEDIUMBLOB")
     private byte[] data;
@@ -20,14 +14,6 @@ public class PictureData implements Serializable {
 
     public PictureData(byte[] data) {
         this.data = data;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public byte[] getData() {
